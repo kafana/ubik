@@ -43,7 +43,8 @@ config_defaults = {
         'python-script-but-no-python-dep,'
         'shlib-with-executable-bit,'
         'unstripped-binary-or-object,'
-        'wrong-file-owner-uid-or-gid'
+        'wrong-file-owner-uid-or-gid,'
+        'changelog-file-missing-in-native-package'
     ),
     "package:rpm.autoreqprov": "no",
     "package:rpm.group": "Miscellaneous",
