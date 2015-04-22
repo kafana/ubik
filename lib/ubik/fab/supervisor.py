@@ -42,7 +42,8 @@ SUP_PROGRAM_KEYS = (
     'exitcodes',
     'stopsignal',
     'stopwaitsecs',
-    'environment'
+    'environment',
+    'user'
 )
 
 def _get_config(configfile='package.ini'):
