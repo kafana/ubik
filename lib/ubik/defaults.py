@@ -36,6 +36,7 @@ config_defaults = {
         'description-synopsis-is-duplicated,'
         'dir-in-usr-local,'
         'dir-or-file-in-opt,'
+        'dir-or-file-in-etc-opt,'
         'missing-dependency-on-libc,'
         'no-copyright-file,'
         'non-etc-file-marked-as-conffile,'
