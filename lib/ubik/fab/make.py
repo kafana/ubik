@@ -90,7 +90,11 @@ def build(version, config, env):
             target = config.get(NAME, 'build_target', vars=config_vars)
         except ConfigParser.NoOptionError:
             target = ''
-        local("make " + target, capture=False)
+        try:
+            options = config.get(NAME, 'make_options', vars=config_vars)
+        except ConfigParser.NoOptionError:
+            options = ''
+        local('make ' + (options + ' ' if len(options) else '') + target, capture=False)
         try:
             target = config.get(NAME, 'install_target')
         except ConfigParser.NoOptionError:
