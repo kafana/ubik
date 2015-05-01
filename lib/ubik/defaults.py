@@ -15,7 +15,7 @@
 #
 "Defaults across all ubik modules"
 
-VERSION="0.10.13"
+VERSION="0.10.14"
 
 CACHE_DIR = '~/.rug/cache'
 CONFIG_FILE = '~/.rug/rug.ini'
