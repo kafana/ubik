@@ -30,7 +30,7 @@ SUP_PROGRAM_KEYS = (
     'command',
     'directory',
     'startsecs',
-    'stopwaitsecs'
+    'stopwaitsecs',
     'socket',
     'process_name',
     'numprocs',
@@ -141,9 +141,11 @@ startsecs=10
 startretries=3
 exitcodes=0,2
 stopsignal=TERM
+socket=tcp://127.0.0.1:9001
 """
     target = os.path.abspath(os.path.join(basedir, '../../../tests/out/opt/prod'))
-    os.makedirs(target)
+    if not os.path.exists(target):
+        os.makedirs(target)
     with open(os.path.join(target, "service.conf"), 'w') as f:
         f.write(test_section)
     write_supervisor_config('1.0', '../doc/ini/example-%s.ini' % NAME,
