@@ -35,15 +35,24 @@ SUP_PROGRAM_KEYS = (
     'process_name',
     'numprocs',
     'priority',
-    'autostart',
     'autorestart',
-    'startsecs',
     'startretries',
     'exitcodes',
     'stopsignal',
-    'stopwaitsecs',
     'environment',
-    'user'
+    'user',
+    'events',
+    'buffer_size',
+    'result_handler',
+    'stdout_logfile',
+    'stdout_logfile_maxbytes',
+    'stdout_logfile_backups',
+    'stdout_capture_maxbytes',
+    'redirect_stderr',
+    'stderr_logfile',
+    'stderr_logfile_maxbytes',
+    'stderr_logfile_backups',
+    'stderr_capture_maxbytes'
 )
 
 def _get_config(configfile='package.ini'):
