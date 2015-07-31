@@ -47,6 +47,7 @@ build_modules = [
     ['monit', 'ubik.fab.monit', 'write_monit_config'],
     ['supervisor', 'ubik.fab.supervisor', 'write_supervisor_config'],
     ['fcgi-supervisor', 'ubik.fab.supervisor', 'write_supervisor_config'],
+    ['eventlistener-supervisor', 'ubik.fab.supervisor', 'write_supervisor_config'],
     ['symlinks', 'ubik.fab.symlinks', 'makelinks'],
 ]
 

@@ -52,8 +52,21 @@ SUP_PROGRAM_KEYS = (
     'stderr_logfile',
     'stderr_logfile_maxbytes',
     'stderr_logfile_backups',
-    'stderr_capture_maxbytes'
+    'stderr_capture_maxbytes',
+    'programs'
 )
+
+def _get_section_type(section = None):
+    if not section:
+        return 'program'
+    if section.startswith('supervisor'):
+        return 'program'
+    elif section.startswith('fcgi-supervisor'):
+        return 'fcgi'
+    elif section.startswith('eventlistener-supervisor'):
+        return 'eventlistener'
+    else:
+        return 'program'
 
 def _get_config(configfile='package.ini'):
     config = ConfigParser.SafeConfigParser()
@@ -74,7 +87,7 @@ def _source_supervisor_conf(fp, source_path):
         for line in sconfin:
             fp.write(line)
 
-def _write_supervisor_section(fp, config, section, config_vars, fcgi_section = False):
+def _write_supervisor_section(fp, config, section, config_vars, section_type = 'program'):
     try:
         service = config.get(section, 'service', vars=config_vars)
     except ConfigParser.NoOptionError:
@@ -82,8 +95,10 @@ def _write_supervisor_section(fp, config, section, config_vars, fcgi_section = F
         # for this module, but it means we have nothing to do here.
         pass
     else:
-        if fcgi_section:
+        if section_type == 'fcgi':
             fp.write('[fcgi-program:%s]\n' % service)
+        elif section_type == 'eventlistener':
+            fp.write('[eventlistener:%s]\n' % service)
         else:
             fp.write('[program:%s]\n' % service)
         for option in SUP_PROGRAM_KEYS:
@@ -125,15 +140,15 @@ def write_supervisor_config(version, config, env):
 
     with open(local_confpath, 'w') as sconf:
         for section in config.sections():
-            if section == 'supervisor' or section == 'fcgi-supervisor' or \
-                section.startswith('supervisor:') or section.startswith('fcgi-supervisor:'):
+            if section == 'supervisor' or section == 'fcgi-supervisor' or section == 'eventlistener-supervisor' or \
+                section.startswith('supervisor:') or section.startswith('fcgi-supervisor:') or section.startswith('eventlistener-supervisor:'):
                 # Check if source param is present, source the conf, and ignore everything else.
                 source_path = _source_path(config, section, config_vars)
                 if source_path:
                     _source_supervisor_conf(sconf, source_path)
                 else:
                     _write_supervisor_section(sconf, config, section, config_vars,
-                        fcgi_section=(True if 'fcgi' in section else False))
+                        section_type = _get_section_type(section))
 
 if __name__ == '__main__':
     basedir = os.path.dirname(os.path.abspath(__file__))
