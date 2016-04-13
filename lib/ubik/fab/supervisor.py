@@ -24,7 +24,7 @@ from fabric.api import local, prompt, warn
 log = logging.getLogger(__name__)
 
 NAME = 'supervisor'
-DEFAULT_CONFDIR = '/etc/opt/lvx/supervisor/conf.d'
+DEFAULT_CONFDIR = '/etc/opt/pflex/supervisor/conf.d'
 SUP_PROGRAM_KEYS = (
     'autostart',
     'command',
