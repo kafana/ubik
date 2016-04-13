@@ -15,7 +15,7 @@
 #
 "Defaults across all ubik modules"
 
-VERSION="0.10.16"
+VERSION="0.10.9.3"
 
 CACHE_DIR = '~/.rug/cache'
 CONFIG_FILE = '~/.rug/rug.ini'
@@ -36,7 +36,7 @@ config_defaults = {
         'description-synopsis-is-duplicated,'
         'dir-in-usr-local,'
         'dir-or-file-in-opt,'
-        'dir-or-file-in-etc-opt,'
+#        'dir-or-file-in-etc-opt,'
         'missing-dependency-on-libc,'
         'no-copyright-file,'
         'non-etc-file-marked-as-conffile,'
